@@ -150,6 +150,79 @@
       font-size: 0.95rem;
     }
 
+    .cv-contact-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .cv-card,
+    .contact-card {
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: rgba(17, 24, 39, 0.74);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+    }
+
+    .cv-card {
+      overflow: hidden;
+    }
+
+    .cv-viewer {
+      height: 620px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card-soft);
+    }
+
+    .cv-viewer iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .cv-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .contact-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-links a {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .contact-links a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.55);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
     .repo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -222,7 +295,7 @@
       flex-wrap: wrap;
     }
 
-        .research-card {
+    .research-card {
       padding: 28px;
       border-radius: 24px;
       border: 1px solid var(--border);
@@ -291,6 +364,14 @@
         align-items: start;
         flex-direction: column;
       }
+
+      .cv-contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-viewer {
+        height: 520px;
+      }
     }
   </style>
 </head>
@@ -318,6 +399,47 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>CV & Contact</h2>
+          <p class="section-note">View my CV, download a copy, or get in touch.</p>
+        </div>
+      </div>
+
+      <div class="cv-contact-grid">
+        <div class="cv-card">
+          <div class="cv-viewer">
+            <iframe
+              src="assets/Anthony_Jarjour_CV.pdf"
+              title="Anthony Jarjour CV"
+            ></iframe>
+          </div>
+
+          <div class="cv-actions">
+            <a class="button primary" href="assets/Anthony_Jarjour_CV.pdf" download>
+              Download CV
+            </a>
+            <a class="button secondary" href="assets/Anthony_Jarjour_CV.pdf" target="_blank" rel="noopener noreferrer">
+              Open in New Tab
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Contact Me</h3>
+          <p>
+            I am interested in research opportunities, graduate study, and collaborations
+            in theoretical physics, mathematical physics, computational physics, and machine learning for physical systems.
+          </p>
+
+          <div class="contact-links">
+            <a href="mailto:anthonyjarjour10@gmail.com">anthonyjarjour10@gmail.com</a>
+            <a href="https://www.linkedin.com/in/anthony-jarjour/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/anthonyjarjar" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section">
