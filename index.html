@@ -22,6 +22,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
@@ -84,7 +88,19 @@
       font-size: clamp(2.2rem, 6vw, 4.4rem);
       line-height: 1.02;
       letter-spacing: -0.06em;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
+    }
+
+    .hero-email {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .hero-email:hover {
+      text-decoration: underline;
     }
 
     .subtitle {
@@ -128,6 +144,55 @@
       color: var(--text);
     }
 
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .dropdown-arrow {
+      font-size: 0.9rem;
+      margin-left: 2px;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 180px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(17, 24, 39, 0.96);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+      display: none;
+      z-index: 100;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      display: grid;
+      gap: 4px;
+    }
+
+    .dropdown-menu a {
+      padding: 10px 12px;
+      border-radius: 11px;
+      color: var(--text);
+      font-size: 0.92rem;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+    }
+
     .section {
       margin-top: 56px;
     }
@@ -150,22 +215,11 @@
       font-size: 0.95rem;
     }
 
-    .cv-contact-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .cv-card,
-    .contact-card {
+    .cv-card {
       border-radius: 24px;
       border: 1px solid var(--border);
       background: rgba(17, 24, 39, 0.74);
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
-    }
-
-    .cv-card {
       overflow: hidden;
     }
 
@@ -186,41 +240,6 @@
       flex-wrap: wrap;
       gap: 12px;
       padding: 18px;
-    }
-
-    .contact-card {
-      padding: 28px;
-    }
-
-    .contact-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .contact-card p {
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .contact-links {
-      display: grid;
-      gap: 10px;
-    }
-
-    .contact-links a {
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-
-    .contact-links a:hover {
-      transform: translateY(-2px);
-      border-color: rgba(56, 189, 248, 0.55);
-      background: rgba(56, 189, 248, 0.08);
     }
 
     .repo-grid {
@@ -342,6 +361,71 @@
       margin-top: 20px;
     }
 
+    .scroll-tracker {
+      position: fixed;
+      left: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: grid;
+      gap: 18px;
+    }
+
+    .scroll-tracker::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: rgba(148, 163, 184, 0.22);
+    }
+
+    .tracker-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 650;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .tracker-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(148, 163, 184, 0.45);
+      background: var(--bg);
+      z-index: 1;
+      transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tracker-label {
+      opacity: 0.72;
+      transition: opacity 0.18s ease;
+    }
+
+    .tracker-link:hover {
+      color: var(--text);
+      transform: translateX(2px);
+    }
+
+    .tracker-link.active {
+      color: var(--accent);
+    }
+
+    .tracker-link.active .tracker-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
+    }
+
+    .tracker-link.active .tracker-label {
+      opacity: 1;
+    }
+
     @media (max-width: 850px) {
       .hero {
         grid-template-columns: 1fr;
@@ -365,25 +449,59 @@
         flex-direction: column;
       }
 
-      .cv-contact-grid {
-        grid-template-columns: 1fr;
-      }
-
       .cv-viewer {
         height: 520px;
+      }
+
+      .dropdown {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .dropdown-menu {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .scroll-tracker {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
+  <nav class="scroll-tracker" aria-label="Page section tracker">
+    <a href="#intro" class="tracker-link active" data-section="intro">
+      <span class="tracker-dot"></span>
+      <span class="tracker-label">Intro</span>
+    </a>
+
+    <a href="#cv" class="tracker-link" data-section="cv">
+      <span class="tracker-dot"></span>
+      <span class="tracker-label">CV</span>
+    </a>
+
+    <a href="#research" class="tracker-link" data-section="research">
+      <span class="tracker-dot"></span>
+      <span class="tracker-label">Research</span>
+    </a>
+
+    <a href="#projects" class="tracker-link" data-section="projects">
+      <span class="tracker-dot"></span>
+      <span class="tracker-label">Projects</span>
+    </a>
+  </nav>
+
   <main class="page">
-    <section class="hero">
+    <section id="intro" class="hero">
       <!-- Replace assets/profile.jpg with your actual image path. -->
       <img class="profile-pic" src="assets/profile.jpg" alt="Profile picture of Anthony Jarjour" />
 
       <div>
         <div class="eyebrow">Computer Science · Math · Physics</div>
         <h1>Anthony Jarjour</h1>
+        <a class="hero-email" href="mailto:anthjar@csu.fullerton.edu">anthjar@csu.fullerton.edu</a>
+
         <p class="subtitle">
           I am a computer science student interested in mathematical physics, quantum field theory,
           differential geometry, and machine learning. This site collects my projects, research interests,
@@ -392,57 +510,53 @@
 
         <div class="actions">
           <!-- Put your CV PDF at assets/Anthony_Jarjour_CV.pdf -->
-          <a class="button primary" href="assets/Anthony_Jarjour_CV.pdf" download>Download CV</a>
+          <div class="dropdown">
+            <button class="button primary dropdown-toggle" type="button">
+              CV
+              <span class="dropdown-arrow">⌄</span>
+            </button>
+
+            <div class="dropdown-menu">
+              <a href="#cv">View CV</a>
+              <a href="assets/Anthony_Jarjour_CV.pdf" download>Download CV</a>
+              <a href="assets/Anthony_Jarjour_CV.pdf" target="_blank" rel="noopener noreferrer">Open in New Tab</a>
+            </div>
+          </div>
+
           <a class="button secondary" href="https://www.linkedin.com/in/anthony-jarjour/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a class="button secondary" href="https://github.com/anthonyjarjar" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section id="cv" class="section">
       <div class="section-header">
         <div>
-          <h2>CV & Contact</h2>
-          <p class="section-note">View my CV, download a copy, or get in touch.</p>
+          <h2>CV</h2>
+          <p class="section-note">View or download my current curriculum vitae.</p>
         </div>
       </div>
 
-      <div class="cv-contact-grid">
-        <div class="cv-card">
-          <div class="cv-viewer">
-            <iframe
-              src="assets/Anthony_Jarjour_CV.pdf"
-              title="Anthony Jarjour CV"
-            ></iframe>
-          </div>
-
-          <div class="cv-actions">
-            <a class="button primary" href="assets/Anthony_Jarjour_CV.pdf" download>
-              Download CV
-            </a>
-            <a class="button secondary" href="assets/Anthony_Jarjour_CV.pdf" target="_blank" rel="noopener noreferrer">
-              Open in New Tab
-            </a>
-          </div>
+      <div class="cv-card">
+        <div class="cv-viewer">
+          <iframe
+            src="assets/Anthony_Jarjour_CV.pdf"
+            title="Anthony Jarjour CV"
+          ></iframe>
         </div>
 
-        <div class="contact-card">
-          <h3>Contact Me</h3>
-          <p>
-            I am interested in research opportunities, graduate study, and collaborations
-            in theoretical physics, mathematical physics, computational physics, and machine learning for physical systems.
-          </p>
-
-          <div class="contact-links">
-            <a href="mailto:anthonyjarjour10@gmail.com">anthonyjarjour10@gmail.com</a>
-            <a href="https://www.linkedin.com/in/anthony-jarjour/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/anthonyjarjar" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
+        <div class="cv-actions">
+          <a class="button primary" href="assets/Anthony_Jarjour_CV.pdf" download>
+            Download CV
+          </a>
+          <a class="button secondary" href="assets/Anthony_Jarjour_CV.pdf" target="_blank" rel="noopener noreferrer">
+            Open in New Tab
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section id="research" class="section">
       <div class="section-header">
         <div>
           <h2>Research</h2>
@@ -485,7 +599,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section id="projects" class="section">
       <div class="section-header">
         <div>
           <h2>Selected Projects</h2>
@@ -551,5 +665,36 @@
       <span>Built with HTML/CSS and hosted on GitHub Pages.</span>
     </footer>
   </main>
+
+  <script>
+    const sections = document.querySelectorAll("section[id]");
+    const trackerLinks = document.querySelectorAll(".tracker-link");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const activeId = entry.target.id;
+
+            trackerLinks.forEach(link => {
+              link.classList.toggle(
+                "active",
+                link.dataset.section === activeId
+              );
+            });
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.35,
+        rootMargin: "-20% 0px -45% 0px"
+      }
+    );
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
