@@ -1,1 +1,1 @@
-Add a viewer for the CV and a contact me page.
+ALl systems nominal.
