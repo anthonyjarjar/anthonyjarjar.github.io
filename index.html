@@ -146,13 +146,17 @@
 
     .section {
       margin-top: 56px;
+      scroll-margin-top: 80px;
     }
 
     .compact-cv-section {
-      margin-top: 28px;
-      padding-top: 80px;
-      padding-bottom: 80px;
-      scroll-margin-top: 80px;
+      margin-top: 36px;
+      padding-top: 48px;
+      padding-bottom: 48px;
+      min-height: 260px;
+      scroll-margin-top: 90px;
+      display: flex;
+      align-items: center;
     }
 
     .section-header {
@@ -174,19 +178,20 @@
     }
 
     .compact-cv-card {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 22px 24px;
-      border-radius: 24px;
+      padding: 18px 22px;
+      border-radius: 22px;
       border: 1px solid var(--border);
       background: rgba(17, 24, 39, 0.74);
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
     }
 
     .compact-cv-card h2 {
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .compact-cv-actions {
@@ -196,17 +201,42 @@
     }
 
     .repo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
       gap: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 16px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .repo-grid::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .repo-grid::-webkit-scrollbar-track {
+      background: rgba(148, 163, 184, 0.12);
+      border-radius: 999px;
+    }
+
+    .repo-grid::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.45);
+      border-radius: 999px;
+    }
+
+    .repo-grid::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.68);
     }
 
     .repo-card {
+      flex: 0 0 350px;
+      min-width: 350px;
       overflow: hidden;
       border-radius: 24px;
       border: 1px solid var(--border);
       background: rgba(17, 24, 39, 0.74);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      scroll-snap-align: start;
     }
 
     .repo-card:hover {
@@ -393,13 +423,15 @@
         justify-content: center;
       }
 
-      .repo-grid {
-        grid-template-columns: 1fr;
-      }
-
       .section-header {
         align-items: start;
         flex-direction: column;
+      }
+
+      .compact-cv-section {
+        min-height: 240px;
+        padding-top: 40px;
+        padding-bottom: 40px;
       }
 
       .compact-cv-card {
@@ -413,6 +445,16 @@
 
       .compact-cv-actions .button {
         flex: 1;
+      }
+
+      .repo-grid {
+        display: flex;
+        gap: 16px;
+      }
+
+      .repo-card {
+        flex: 0 0 82vw;
+        min-width: 82vw;
       }
 
       .scroll-tracker {
@@ -446,7 +488,6 @@
 
   <main class="page">
     <section id="intro" class="hero">
-      <!-- Replace assets/profile.jpg with your actual image path. -->
       <img class="profile-pic" src="assets/profile.jpg" alt="Profile picture of Anthony Jarjour" />
 
       <div>
@@ -461,7 +502,6 @@
         </p>
 
         <div class="actions">
-          <!-- Put your CV PDF at assets/Anthony_Jarjour_CV.pdf -->
           <a class="button primary" href="#cv">CV</a>
           <a class="button secondary" href="https://www.linkedin.com/in/anthony-jarjour/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a class="button secondary" href="https://github.com/anthonyjarjar" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -491,7 +531,8 @@
       <div class="section-header">
         <div>
           <h2>Research</h2>
-          <p class="section-note">Current work and research interests in theoretical and mathematical physics, 
+          <p class="section-note">
+            Current work and research interests in theoretical and mathematical physics,
             theory of computation, and Riemannian geometry.
           </p>
         </div>
@@ -499,17 +540,15 @@
 
       <div class="research-card">
         <h3>Current Research</h3>
-        
-        
-        <li><strong>Quantum Field Theory</strong>
-          <p>
-            I am currently studying inequivalent Rindler vacua in Minkowski spacetime, focusing on Bogoliubov
-            transformations between shifted Rindler frames and their implications for vacuum structure and
-            thermodynamic interpretation. This work builds on Lochan and Padmanabhan's 2025 analysis of nested
-            Rindler vacua and connects to broader questions in algebraic QFT, Green's functions, propagators,
-            and quantum field theory in curved spacetime.
-          </p>
-        
+
+        <p>
+          <strong>Quantum Field Theory.</strong>
+          I am currently studying inequivalent Rindler vacua in Minkowski spacetime, focusing on Bogoliubov
+          transformations between shifted Rindler frames and their implications for vacuum structure and
+          thermodynamic interpretation. This work builds on Lochan and Padmanabhan's 2025 analysis of nested
+          Rindler vacua and connects to broader questions in algebraic QFT, Green's functions, propagators,
+          and quantum field theory in curved spacetime.
+        </p>
 
         <div class="research-subsection">
           <h3>Presentations</h3>
@@ -539,7 +578,7 @@
 
       <div class="repo-grid">
         <a class="repo-card" href="https://github.com/anthonyjarjar/DoublePendulum" target="_blank" rel="noopener noreferrer">
-          <img class="repo-thumb" src="assets/repo-four.jpg" alt="Thumbnail for project one" />
+          <img class="repo-thumb" src="assets/repo-four.jpg" alt="Thumbnail for inverted pendulum reinforcement learning project" />
           <div class="repo-content">
             <div class="repo-title">Balancing Inverted Single Pendulum with Reinforcement Learning</div>
             <p class="repo-description">
@@ -558,9 +597,8 @@
           </div>
         </a>
 
-      <div class="repo-grid">
         <a class="repo-card" href="https://github.com/anthonyjarjar/Chloris" target="_blank" rel="noopener noreferrer">
-          <img class="repo-thumb" src="assets/repo-one.jpg" alt="Thumbnail for project one" />
+          <img class="repo-thumb" src="assets/repo-one.jpg" alt="Thumbnail for residual neural network image classifier project" />
           <div class="repo-content">
             <div class="repo-title">Residual Neural Network Image Classifier</div>
             <p class="repo-description">
@@ -578,12 +616,12 @@
         </a>
 
         <a class="repo-card" href="https://github.com/anthonyjarjar/Orbit-Gravity-Simulation" target="_blank" rel="noopener noreferrer">
-          <img class="repo-thumb" src="assets/repo-two.jpg" alt="Thumbnail for project two" />
+          <img class="repo-thumb" src="assets/repo-two.jpg" alt="Thumbnail for N-body simulation project" />
           <div class="repo-content">
             <div class="repo-title">N Body Problem Simulator</div>
             <p class="repo-description">
-              Implemented Runge-Kutta integration to model N-body dynamics in a Newtonian gravitational system; visualized
-              orbit evolution and field behavior.
+              Implemented Runge-Kutta integration to model N-body dynamics in a Newtonian gravitational system.
+              The project visualizes orbit evolution, gravitational interaction, and field behavior.
             </p>
             <div class="repo-tags">
               <span class="tag">Physics</span>
@@ -594,12 +632,12 @@
         </a>
 
         <a class="repo-card" href="https://github.com/anthonyjarjar/LLM-CodeGen" target="_blank" rel="noopener noreferrer">
-          <img class="repo-thumb" src="assets/repo-three.jpg" alt="Thumbnail for project three" />
+          <img class="repo-thumb" src="assets/repo-three.jpg" alt="Thumbnail for large language model code generation project" />
           <div class="repo-content">
             <div class="repo-title">Large Language Model for Code Generation</div>
             <p class="repo-description">
-                Evaluated model output using unit tests to validate code correctness across
-                multiple functional tasks, with a 93% pass rate.
+              Evaluated model output using unit tests to validate code correctness across
+              multiple functional tasks, achieving a 93% pass rate.
             </p>
             <div class="repo-tags">
               <span class="tag">Python</span>
@@ -615,7 +653,7 @@
     <footer class="footer">
       <span>© 2026 Anthony Jarjour</span>
       <span>Built with HTML/CSS and hosted on GitHub Pages.</span>
-      <span>Last Updated May 15, 2026.</span>
+      <span>Last updated May 15, 2026.</span>
     </footer>
   </main>
 
